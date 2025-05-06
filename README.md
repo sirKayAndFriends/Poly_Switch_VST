@@ -30,33 +30,6 @@ Where the sound comes out
 ## SECRET SETTINGS!
 Hover over the title.  Notice some hidden buttons?  Wow, good job finding the secret!  Clicking on the "POLY" button deactivates the power amp section if thats your thing.  The "SWITCH" button swaps out Pirkle's algorithm for an older, cruddier, balder algorithm of my own which I used in the V1.0.  It sounds ok and I have some nostalgia for it.
 
-## Suggestions for Getting Started
-**Fender-y niceness**
-- Boost @ 9 o'clock (this is a nice fender scoop but push it for a more "tweedy" sound)
-- Peak @ 400 (this will give you the fendery thing with a scoop or boost, but I also like a 2400 treble boostery thing here too)
-- Bass @ noon, Treble @ 3 o'clock
-- Voice @ 400
-- Mids sounds good anywhere
-- Gain under noon
-- Cabinet above noon 
-
-**Sort of Hendrix-y Marshall-y**
-- Boost @ 3 o'clock
-- Peak @ 2400
-- Voice @ 850
-- Bass and Treble @ noon
-- Mids @ 2 o'clock
-- Gain @ 12 o'clock
-- Cabinet @ 12 o'clock
-
-**Big Heavy Metal Sound**
-- Boost @ 3 o'clock
-- Peak @ 740
-- Voice @ 850
-- Tone to Taste (I like mids pushed a little)
-- Gain @ 2 o'clock
-- Cabinet below noon
-
 ## Some Technical Bits for the Nerds
 So this has gone through a bunch of different versions and methods to get here (hi Adam! If you're reading this, made you look in the Nerd Section).  I eventually got annoyed with the PureData C++ compiler etc and grumped off to learn me some proper C++ with JUCE.  It now sounds way better and there are fewer source files to look through.
 
@@ -64,13 +37,15 @@ The overall all architecture is based on a certain pedal company's line of amp-l
 
 This is what this VST does.  The Boost and EQ section have moveable mid controls for a variety of different sounds (much easier to do with DSP) and common overdrive and filtering.  Also the EQ section in the pedals is fully active and doesn't model the usual "TMB" tonestack of most amplifiers.  You know what? I like this, it means you can get way more sounds out of the thing while still setting it up to sounds like your favourite tweed 1959 or whatever it is.  The "cab sim" section is just a lowpass filter to round things off - there are so many EQ controls that I doubt you really need a cab sim after this.  If you insist, the cab knob fully to the right is set at 6000hz which is way higher than a normal cab sim filter so your fave IR VST will sit very nicely after this.  I've tried it with Reaper's bog standard cab modeller at it sound areet.
 
-The overdrive itself is, as mentioned above, based on Will Pirkle's modelling of class A triode amplifiers and class B pentode power amps.  It is crazy reading and, honestly, mostly went over my head.  I downloaded his code, tinkered and simplified a bit and it sounded great.  The LESS channel is two class A triodes cascaded and the MORE channel adds two more.
+The overdrive itself is, as mentioned above, based on Will Pirkle's modelling of class A triode amplifiers and class B pentode power amps.  It is crazy reading and, honestly, mostly went over my head.  I downloaded his code, tinkered and simplified a bit and it sounded great.  The LESS/MORE settings change the 'saturation' parameter without changing any of the architecture (like the amount of triodes).
 
 The secret secondary overdrive algorithm is the original Poly Amp setup.  LESS channel is a hyperbolic tangent waveshaper and the MORE is a linear transform function I found at [amp books](https://www.ampbooks.com/mobile/dsp/preamp/) website.  Although it looks slightly unwieldy it sounds very nice and is more aggressive and "stiff" than the Pirkle algorithm.  I like it.
 
 ## SOURCE FILES
-Have at it if you want to mess around.  The filters are ripe for modding as they might not fit your needs!
+Have at it if you want to mess around.  The filters are ripe for modding as they might not fit your needs!  Also I'm not a programmer so I get that my code probably looks like crap.  I'd like to get better and start doing some smarter stuff but nothing would ever get done if we wait for perfection - the program works fine as is.  I don't care, code-bros log off.
 
-## Some Stuff for Future Versions
-- Definitely needs some better anti-aliasing stuff going on.  For some reason I can't fathom neither algorithm plays very nicely with your traditional oversampling/interpolating method.  We'll see.
+## Changelog - updated 06/05/2025
+- Some proper anti-aliasing.  4x oversampling and some aggressive filter.  Sounds areet.  Still fiddling with this so might change later.
+- volume differences fixed! All channels should be in the same ballpark.
+- more active cab filter - does more, same great price.
 
