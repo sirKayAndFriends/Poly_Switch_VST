@@ -16,7 +16,7 @@ Three band EQ
 - **Voice:** the magic mid centre frequency.  Goes from 400Hz to 850Hz for a full range of amp mids sounds... you know, "American" and "British" :/
 
 ### GAIN
-The gain bit.  This is based on Will Pirkle's triode simulation in and addendum to the programming tome *Designing Audio Effect Plugins in C++* which you can find [here!](https://www.willpirkle.com/fx-book-bonus-material/chapter-19-addendum/).  <sub>(This is BANANAS - the amount of detail, the depth... also I love the style of those old plugins.  What were they thinking??)</sub>
+The gain bit.  This is based on Will Pirkle's triode simulation in and addendum to the programming tome *Designing Audio Effect Plugins in C++* which you can find [here!](https://www.willpirkle.com/fx-book-bonus-material/chapter-19-addendum/).  <sub>(This is BANANAS... also I love the style of those old plugins.  What were they thinking??)</sub>
 
 - **Gain:** amount of gain bit
 - **LESS:** the lower gain channel
