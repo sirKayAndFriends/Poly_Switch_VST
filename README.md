@@ -1,4 +1,4 @@
-# Poly Switch Amplifier VST (v2.0)
+# Poly Switch Amplifier VST (v3.0)
 A two channel amplifier with flexible EQ stuff and fun features for all ages.
 
 ## A Quick Introduction
@@ -18,6 +18,8 @@ Three band EQ
 ### GAIN
 The gain bit.  This is based on Will Pirkle's triode simulation in and addendum to the programming tome *Designing Audio Effect Plugins in C++* which you can find [here!](https://www.willpirkle.com/fx-book-bonus-material/chapter-19-addendum/).  <sub>(This is BANANAS... also I love the style of those old plugins.  What were they thinking??)</sub>
 
+If you have the compression function on (see "secret settings") you have to be a little careful about input volume.  The compressor waveshaper can start ducking wildly if the signal is too high going into the amp so be careful!  This thing acts a bit more like an op-amp distortion pedal when pushed too hard so don't be going will-nilly with the boosts beforehand.  As long as the gain level at the amp input is below 0db you'll be fine.
+
 - **Gain:** amount of gain bit
 - **LESS:** the lower gain channel
 - **MORE:** high gain channel
@@ -28,7 +30,7 @@ Where the sound comes out
 - **Cabinet:** a low pass filter to simulate a speaker response.  There are so many EQ controls already that I think a bunch more for a cabsim would be ludicrous.  This is simply a lowpass filter with a variable cutoff between 3000 and 6000 Hz.
 
 ## SECRET SETTINGS!
-Hover over the title.  Notice some hidden buttons?  Wow, good job finding the secret!  Clicking on the "POLY" button deactivates the power amp section if thats your thing.  The "SWITCH" button swaps out Pirkle's algorithm for an older, cruddier, balder algorithm of my own which I used in the V1.0.  It sounds ok and I have some nostalgia for it.
+Hover over the title.  Notice some hidden buttons?  Wow, good job finding the secret!  Clicking on the "POLY" button deactivates the power amp section if thats your thing.  The "SWITCH" button turns off Pirkle's compression function.  This kinda "pre-shapes" the guitar signal and compresses it.  This is cool because the following waveshaper then becomes "dynamic" as the incoming compressed guitar signal has a DC offset relative to its amplitude.  Basically the bias point moves around depending on how you play to get a more "interactive" distortion (something something triode self-bias).  BUT you have to be careful about the input volume as too louda signal will make this section go apeshit and you'll get some really weird ducking and stuff.  Easy enough to avoid but if you can't be arsed with proper gain-staging (like me) you can turn this off.  It will have less of the mythical "sag" but I'm sure we can all live with that.
 
 ## Some Technical Bits for the Nerds
 So this has gone through a bunch of different versions and methods to get here (hi Adam! If you're reading this, made you look in the Nerd Section).  I eventually got annoyed with the PureData C++ compiler etc and grumped off to learn me some proper C++ with JUCE.  It now sounds way better and there are fewer source files to look through.
@@ -39,12 +41,12 @@ This is what this VST does.  The Boost and EQ section have moveable mid controls
 
 The overdrive itself is, as mentioned above, based on Will Pirkle's modelling of class A triode amplifiers and class B pentode power amps.  It is crazy reading and, honestly, mostly went over my head.  I downloaded his code, tinkered and simplified a bit and it sounded great.  The LESS/MORE settings change the 'saturation' parameter without changing any of the architecture (like the amount of triodes).
 
-The secret secondary overdrive algorithm is the original Poly Amp setup.  LESS channel is a hyperbolic tangent waveshaper and the MORE is a linear transform function I found at [amp books](https://www.ampbooks.com/mobile/dsp/preamp/) website.  Although it looks slightly unwieldy it sounds very nice and is more aggressive and "stiff" than the Pirkle algorithm.  I like it.
-
 ## SOURCE FILES
 Have at it if you want to mess around.  The filters are ripe for modding as they might not fit your needs!  Also I'm not a programmer so I get that my code probably looks like crap.  I'd like to get better and start doing some smarter stuff but nothing would ever get done if we wait for perfection - the program works fine as is.  I don't care, code-bros log off.
 
-## Changelog - updated 06/05/2025
+## Changelog - updated 07/05/2025
+- altered gain structure.  Previously I was using three (!) different algorithms and that felt excessive so its only one now.
+- option to switch off the "compression" function
 - Some proper anti-aliasing.  4x oversampling and some aggressive filter.  Sounds areet.  Still fiddling with this so might change later.
 - volume differences fixed! All channels should be in the same ballpark.
 - more active cab filter - does more, same great price.
